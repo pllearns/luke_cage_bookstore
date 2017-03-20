@@ -1,0 +1,16 @@
+extends ../layout
+
+block content
+  h1= book.title
+
+  h4 Authors
+  ul
+    for author in book.authors
+      li= author.name
+
+  h4 Genres
+  ul
+    for genre in book.genres
+      li= genre.title
+
+  a(href="/books/"+ book.id +"/edit")='Edit Book'

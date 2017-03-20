@@ -5,6 +5,13 @@ var logger = require('morgan')
 var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
 
+var routes = require('./routes/index')
+var users = require('./routes/users')
+var books = require('./routes/books')
+var add = require('./routes/add')
+var update = require('./routes/update')
+var authors = require('./routes/authors')
+
 var app = express()
 
 app.set('views', path.join(__dirname, 'views'))
