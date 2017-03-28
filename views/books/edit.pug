@@ -17,6 +17,6 @@ block content
     div.form-group
       select(name="book[genres]" multiple)
         for genre in genres
-          option(value=genre.id selected=book.genreIds.includes(genre.id))= genre.title
+          option(value=genre.id selected=book.genreIds.hasOwnProperty(genres.id))= genre.title
 
-    input(type.submit="submit", value="Save changes")
+    input(type="submit", value="Save changes")

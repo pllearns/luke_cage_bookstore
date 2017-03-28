@@ -2,8 +2,7 @@ extends ../layout
 
 block content
 
-
-  form(action="/books", method="post") Add A Book!
+  form(action="/books/new", method="post") Add A Book!
     input(type="text" name="book[title]", placeholder="Book Title")
     input(type="text" name="book[authors][0][name]", placeholder="Author name")
     input(type="text" name="book[authors][1][name]", placeholder="Author name")

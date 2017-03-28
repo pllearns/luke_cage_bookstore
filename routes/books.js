@@ -4,48 +4,48 @@ const express = require('express')
 const router = express.Router()
 const database = require('../database')
 
-router.get('/', function(request, response, next){
+router.get('/', (request, response, next) => {
   response.redirect('/')
 })
 
-router.get('/new', function(request, response) {
+router.get('/new', (request, response) => {
   database.getAllGenres()
     .then(function(genres){
       response.render('books/new',{
         genres: genres
-      })
     })
+  })
 })
 
-router.post('/', function(request, response) {
+router.post('/new', (request, response) => {
   database.createBook(request.body.book)
-    .catch(function(error){
-      response.status(500).send(error)
-    })
-    .then(function(book){
+    .then(book => {
       response.redirect('/books/'+book.id)
     })
+    .catch(error => {
+      response.status(500).send(error)
+    })
 })
 
-router.get('/:bookId', function(request, response) {
+router.get('/:bookId', (request, response) => {
   database.getBookWithAuthorsAndGenresByBookId(request.params.bookId)
-    .then(function(book){
+    .then(book => {
       response.render('books/show', {
         book: book
       })
     })
-    .catch(function(error){
+    .catch(error => {
       response.status(500).send(error)
-    })
+  })
 })
 
-router.get('/:bookId/edit', function(request, response) {
+router.get('/:bookId/edit', (request, response) => {
 
   Promise.all([
     database.getBookWithAuthorsAndGenresByBookId(request.params.bookId),
     database.getAllGenres()
   ])
-    .then(function(results){
+    .then(results => {
       const book = results[0]
       const genres = results[1]
 
@@ -56,24 +56,24 @@ router.get('/:bookId/edit', function(request, response) {
         genres: genres,
       })
     })
-    .catch(function(error){
+    .catch(error => {
       response.status(500).send(error)
-    })
+  })
 })
 
-router.post('/:bookId', function(request, response) {
+router.post('/:bookId', (request, response) => {
   const bookId = request.params.bookId
   const attributes = request.body.book
   if (typeof attributes.genres === 'string'){
     attributes.genres = [attributes.genres]
   }
   database.updateBook(bookId, attributes)
-    .catch(function(error){
+    .catch(error => {
       response.status(500).render('error', {error: error})
     })
-    .then(function(){
+    .then(() => {
       response.redirect('/books/'+bookId)
-    })
+  })
 })
 
 

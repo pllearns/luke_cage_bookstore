@@ -1,9 +1,14 @@
 'use strict';
 
-const databaseName = process.env.NODE_ENV ? 'luke_cage_bookstore-test' : 'luke_cage_bookstore'
 const pgp = require('pg-promise')();
-const connectionString = `postgres://${process.env.USER}@localhost:5432/luke_cage_bookstore`
-const db = pgp(connectionString);
+const connection = {
+  host: 'localhost',
+  port: 5432,
+  database: 'luke_cage_bookstore'
+}
+
+const db = pgp(connection);
+console.log('am I connected?', connection)
 
 const getBookById = function(bookId){
   return db.one("select * from books where books.id=$1", [bookId])
@@ -310,17 +315,17 @@ const searchForBooks = function(options){
 }
 
 module.exports = {
-  pgp: pgp,
-  db: db,
-  getAllBooks: getAllBooks,
-  getAllAuthors: getAllAuthors,
-  getAllBooksWithAuthors: getAllBooksWithAuthors,
-  getBookWithAuthorsAndGenresByBookId: getBookWithAuthorsAndGenresByBookId,
-  getBookById: getBookById,
-  createBook: createBook,
-  createAuthor: createAuthor,
-  getAllGenres: getAllGenres,
-  getAuthorsByBookId: getAuthorsByBookId,
-  searchForBooks: searchForBooks,
-  updateBook: updateBook,
+  pgp,
+  db,
+  getAllBooks,
+  getAllAuthors,
+  getAllBooksWithAuthors,
+  getBookWithAuthorsAndGenresByBookId,
+  getBookById,
+  createBook,
+  createAuthor,
+  getAllGenres,
+  getAuthorsByBookId,
+  searchForBooks,
+  updateBook,
 };

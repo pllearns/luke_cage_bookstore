@@ -39,6 +39,5 @@ describe('createbook', () => {
 
 describe('updateBook', () => {
   it('should update book info into the books table', () => {
-
   })
 })

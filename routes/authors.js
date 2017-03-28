@@ -1,37 +1,36 @@
-const express = require('express');
-const router = express.Router();
-const database = require('../database');
+const express = require('express')
+const router = express.Router()
+const database = require('../database')
 
-router.post('/', function(request, response) {
+router.post('/', (request, response) => {
   database.createAuthor(request.body.author)
-    .catch(function(error){
-      res.status(500).send(error)
+    .catch(error => {
+      response.status(500).send(error)
     })
-    .then(function(author){
-      res.redirect('/authors/'+author.id)
+    .then(author => {
+      response.redirect('/authors/'+author.id)
     })
-});
+})
 
 
 router.get('/:bookId', function(request, response) {
   database.getBookWithAuthorsAndGenresByBookId(request.params.bookId)
-    .then(function(book){
+    .then(book => {
       response.render('books/show', {
         book: book
       })
     })
-    .catch(function(error){
+    .catch(error => {
       response.status(500).send(error)
     })
-});
+})
 
-router.get('/:bookId/edit', function(request, response) {
-
+router.get('/:bookId/edit', (request, response) => {
   Promise.all([
     database.getBookWithAuthorsAndGenresByBookId(request.params.bookId),
     database.getAllGenres()
   ])
-    .then(function(results){
+    .then(results => {
       const book = results[0]
       const genres = results[1]
 
@@ -42,25 +41,25 @@ router.get('/:bookId/edit', function(request, response) {
         genres: genres,
       })
     })
-    .catch(function(error){
+    .catch(error => {
       response.status(500).send(error)
     })
 })
 
-router.post('/:authorId', function(request, response) {
+router.post('/:authorId', (request, response) => {
   const authorId = request.params.authorId
   const attributes = request.body.author
   if (typeof attributes.genres === 'string'){
     attributes.genres = [attributes.genres]
   }
   database.updateAuthor(authorId, attributes)
-    .catch(function(error){
-      console.error(error);
+    .catch(error => {
+      console.error(error)
       response.status(500).render('error', {error: error})
     })
-    .then(function(){
+    .then(() => {
       response.redirect('/authors/'+authorId)
     })
 })
 
-module.exports = router;
+module.exports = router

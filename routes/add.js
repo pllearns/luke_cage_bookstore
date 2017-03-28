@@ -5,12 +5,12 @@ const database = require('../database')
 router.post('/add', (request, response) => {
   const title = request.body
   database.addBook(title)
-    .then(function(books) {
+    .then(books => {
       response.render('../views/books/show', {
         books: books
       })
     })
-    .catch(function(error) {
+    .catch(error =>  {
       throw error
     })
 })

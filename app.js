@@ -23,12 +23,24 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
+app.use('/', routes);
+app.use('/books', books);
+app.use('/authors', authors);
+app.use('/users', users);
+app.use('/update', update);
+app.use('/add', add);
+
+
 
 app.use(function(req, res, next) {
   var err = new Error('Not Found')
   err.status = 404
   next(err)
 })
+
+app.get('*', function(req, res){
+  res.send('what???', 404);
+});
 
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
