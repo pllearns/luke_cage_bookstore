@@ -21,3 +21,13 @@ input[type=text] {
     background-color: white;
     background-position: 10px 10px;
 }
+
+img {
+  height: 80%;
+  width: 100%;
+}
+
+.image {
+  height: 300px;
+  width: 200px;
+}

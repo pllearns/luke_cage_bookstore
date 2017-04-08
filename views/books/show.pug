@@ -14,3 +14,20 @@ block content
       li= genre.title
 
   a(href="/books/"+ book.id +"/edit")='Edit Book'
+  .shopping-cart
+  .title
+    | Shopping Bag
+  .item
+    .buttons
+      button.delete-btn
+      button.like-btn
+    .image
+      img(src=book.img_url)
+    .description
+      span= book.title
+    .quantity
+      button.plus-btn(type='button', name='button')
+      input(type='text', name='name', value='1')
+      button.minus-btn(type='button', name='button')
+    .total-price $18
+  
