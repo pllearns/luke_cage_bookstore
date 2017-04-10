@@ -3,8 +3,11 @@ html
     title= title
     link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u", crossorigin="anonymous")
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/font-awesome-4.7.0/css/font-awesome.min.css')  
+    link(href='https://fonts.googleapis.com/css?family=Anton', rel='stylesheet')
   body
 
+    img(src="/images/LUKE_CAGE_BOOKS.png")
     nav.navbar.navbar-inverse
       .container-fluid
         .navbar-header
@@ -13,18 +16,13 @@ html
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand(href='/') Home
         #bs-example-navbar-collapse-1.collapse.navbar-collapse
-          ul.nav.navbar-nav
-            li
-              a(href='/books') Books
-            
-
+          a.navbar-brand(href='/') Home
+          a.navbar-brand(href='/books') Books
           form.navbar-form.navbar-left(action="/", method="get")
-            .form-group
+            .form-group.flex-last
               input.form-control(type="text", name="search_query", placeholder="Search by Title, Genre or Author")
               button.btn.btn-default(type="submit", value="Submit") Submit
-          ul.nav.navbar-nav.navbar-right
     div.container
 
       block content

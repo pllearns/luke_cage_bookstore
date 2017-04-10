@@ -2,7 +2,8 @@ DROP TABLE IF EXISTS books;
 
 CREATE TABLE books (
   id SERIAL PRIMARY KEY,
-  title VARCHAR(255) NOT NULL
+  title VARCHAR(255) NOT NULL,
+  img_url TEXT
 );
 
 DROP TABLE IF EXISTS genres;
