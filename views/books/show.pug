@@ -20,14 +20,20 @@ block content
   .item
     .buttons
       button.delete-btn
+        i.fa.fa-trash(aria-hidden='true')
       button.like-btn
-    .image
+        i.fa.fa-thumbs-up(aria-hidden='true')
+    br  
+    .book_image
       img(src=book.img_url)
+    br
     .description
       span= book.title
     .quantity
       button.plus-btn(type='button', name='button')
+        i.fa.fa-plus(aria-hidden='true')
       input(type='text', name='name', value='1')
       button.minus-btn(type='button', name='button')
+        i.fa.fa-minus(aria-hidden='true')
     .total-price $18
   
